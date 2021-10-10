@@ -1,6 +1,6 @@
 import time
-import sys
-from OsCommands import OsCommands
+from src.utilityClasses.utilClass import printMessage
+from src.ActionClasses.OsCommands import OsCommands
 class program:
 	def __init__(self):
 		self.osCommands = OsCommands()
@@ -10,31 +10,34 @@ class program:
 						"present working directory Command", 
 						"LS Command"]
 		exitList = ['Exit', 'continue']
+		self.osCommands.RunOption(3)
 
 	def Start(self):
 		while True:
 			self.printCommands()
-			opt = input('Give Option')
-			self.printMessage('Option selected is :')
+			opt = int(input('Give Option'))
+			printMessage('Option selected is :')
 			opt = opt - 1
-			self.printMessage(ListOfActions[opt])
-			sys.stdout.flush()
+			printMessage(ListOfActions[opt])
+			self.osCommands.RunOption(3)
 			self.osCommands.RunOption(opt)
 			self.printCommands(1)
-			opt = input('Choose Option')
+			opt = int(input('Choose Option'))
 
 			if opt == 1:
+				self.osCommands.RunOption(3)
 				break
 			elif opt == 2:
-				self.printMessage('Continuing')
+				printMessage('Continuing')
 			else:
-				self.printMessage('wrong option')
-
+				printMessage('wrong option')
+				self.osCommands.RunOption(3)
 				break
+			self.osCommands.RunOption(3)
 
 	def printCommands(self, opt = 0):
 		idx = 0
-		self.printMessage('Select Commands by sequence')
+		printMessage('Select Commands by sequence\r\n')
 		List = []
 		if opt == 0:
 			List = ListOfActions
@@ -42,10 +45,7 @@ class program:
 			List = exitList
 
 		for idx, loop in enumerate(List, start = 1):
-			self.printMessage(str(idx) + '. ' + loop)
+			printMessage(str(idx) + '. ' + loop + '\r\n')
 			time.sleep(.2)
 
-	def printMessage(self, message):
-		sys.stdout.write(message)
-	
 	
