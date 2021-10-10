@@ -1,8 +1,11 @@
-import os
+from os import system, name
+
+from src.utilityClasses.utilClass import utilClass
 
 class OsCommands:
 
     def __init__(self):
+        self.util = utilClass()
         self.commands = ['whoami', 'pwd', 'ls', 'clear']
 
     def RunOption(self, opt):
@@ -16,7 +19,10 @@ class OsCommands:
             command = self.commands[2]
         elif(opt == 3):
             command = self.commands[3]
-            
+        self.util.printMessage(command)
         self.RunCommand(command)
 
-    def RunCommand(self, command): os.system(command)
+    def RunCommand(self, command): 
+        self.util.printMessage('\033[0;31;0m')
+        system(command)
+        self.util.printMessage("\033[0m")
