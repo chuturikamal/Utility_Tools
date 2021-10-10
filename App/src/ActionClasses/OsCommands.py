@@ -8,7 +8,7 @@ class OsCommands:
         self.commands = ['whoami', 'pwd', 'ls', 'clear']
 
     def RunOption(self, opt):
-        printMessage('Command '+self.commands[0]+' Initiated')
+        printMessage ('Command '+self.commands[0]+' Initiated')
         command = ''
         if(opt == 0):
             command = self.commands[0]
