@@ -1,5 +1,6 @@
 from os import system, name
-
+import os
+import subprocess
 from src.utilityClasses.utilClass import printMessage
 
 class OsCommands:
@@ -8,17 +9,20 @@ class OsCommands:
         self.commands = ['whoami', 'pwd', 'ls', 'clear']
 
     def RunOption(self, opt):
-        printMessage ('Command '+self.commands[0]+' Initiated')
+        printMessage ('Command '+self.commands[opt]+' Initiated')
         command = ''
-        if(opt == 0):
-            command = self.commands[0]
-        elif(opt == 1):
-            command = self.commands[1]
-        elif(opt == 2):
-            command = self.commands[2]
-        elif(opt == 3):
-            command = self.commands[3]
-        self.RunCommand(command)
+        pwd = os.getcwd()
+        print(pwd)
+        rc = subprocess.check_call([pwd + "/src/bashFiles/lsCommand.sh" , str(opt)])
+        # if(opt == 0):
+        #     command = self.commands[0]
+        # elif(opt == 1):
+        #     command = self.commands[1]
+        # elif(opt == 2):
+
+        # elif(opt == 3):
+        #     command = self.commands[3]
+        # self.RunCommand(command)
 
     def RunCommand(self, command): 
         printMessage('\033[0;31;0m')
